@@ -1,0 +1,69 @@
+// LOCALHOST
+## Get all contacts
+GET http://localhost:3000/users
+
+
+### Get all contacts by id
+GET http://localhost:3000/users/6845dba365a567868ffb55b9
+
+
+### Create contacts
+POST http://localhost:3000/users HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Salt",
+    "price": 3.99,
+    "inStock": true
+}
+
+
+### PUT contact
+PUT http://localhost:3000/users/6847013b576db2cf4e8ccac7 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "flower",
+    "price": 12.99,
+    "inStock": true
+}
+
+### DELETE contact
+DELETE http://localhost:3000/users/684701f1576db2cf4e8ccac8 HTTP/1.1
+
+
+
+### item calls
+
+// LOCALHOST
+## Get all contacts
+GET http://localhost:3000/items
+
+
+### Get all contacts by id
+GET http://localhost:3000/items/6845dba365a567868ffb55b9
+
+
+### Create contacts
+POST http://localhost:3000/items HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Glass table",
+    "price": 320.99,
+    "inStock": true
+}
+
+
+### PUT contact
+PUT http://localhost:3000/items/6847013b576db2cf4e8ccac7 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "flower",
+    "price": 12.99,
+    "inStock": true
+}
+
+### DELETE contact
+DELETE http://localhost:3000/items/684701f1576db2cf4e8ccac8 HTTP/1.1
