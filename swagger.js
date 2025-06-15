@@ -6,7 +6,7 @@ const doc = {
         description: 'Users Api'
     },
     host: 'project-2-0f7y.onrender.com',
-    schemes: ['https', 'http']
+    schemes: ['https']
 };
 const outputFile = '.swagger.json';
 //const endpointFiles = ['./routes/index.js'];
