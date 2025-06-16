@@ -5,20 +5,26 @@ const usersController = require('../controllers/users');
 const { validateUser, validateIdParam } = require('../middleware/validation');
 const { handleValidationErrors } = require('../middleware/errorHandler');
 
+const { isAuthenticated }  = require("../middleware/authenticate")
 
+//#swagger.tags = ['Users']
 router.get('/', usersController.getAll);
+//#swagger.tags = ['Users']
 router.get('/:id', validateIdParam, handleValidationErrors, usersController.getSingle);
-router.post('/', validateUser, handleValidationErrors, usersController.createUser);
-router.put('/:id', [...validateIdParam, ...validateUser], handleValidationErrors, usersController.updateUser);
-router.delete('/:id', validateIdParam, handleValidationErrors, usersController.deleteUser);
+//#swagger.tags = ['Users']
+router.post('/', isAuthenticated, validateUser, handleValidationErrors, usersController.createUser);
+//#swagger.tags = ['Users']
+router.put('/:id', isAuthenticated, [...validateIdParam, ...validateUser], handleValidationErrors, usersController.updateUser);
+//#swagger.tags = ['Users']
+router.delete('/:id', isAuthenticated, validateIdParam, handleValidationErrors, usersController.deleteUser);
 
 
 
-router.get('/', (req, res) => {
+//router.get('/', (req, res) => {
   //#swagger.tags = ['Users']
   //#swagger.description = 'Get all users'
-  res.send('All users');
-});
+//  res.send('All users');
+//});
 
 
 module.exports = router;

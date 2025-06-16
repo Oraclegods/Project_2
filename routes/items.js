@@ -5,16 +5,23 @@ const itemController = require('../controllers/items'); // This is correct
 
 const { validateItems, validateIdParam } = require('../middleware/validation');
 const { handleValidationErrors } = require('../middleware/errorHandler');
+const { isAuthenticated } = require("../middleware/authenticate")
 
 // Correct usage: use itemController.<function>
+
+  //#swagger.tags = ['Items']
 router.get('/', itemController.getAll);
+  //#swagger.tags = ['Items']
 router.get('/:id', validateIdParam, handleValidationErrors, itemController.getSingle);
-router.post('/', validateItems, handleValidationErrors, itemController.createItem);
-router.put('/:id', validateIdParam, validateItems, handleValidationErrors, itemController.updateItem);
-router.delete('/:id', validateIdParam, handleValidationErrors, itemController.deleteItem);
+  //#swagger.tags = ['Items']
+router.post('/', isAuthenticated, validateItems, handleValidationErrors, itemController.createItem);
+  //#swagger.tags = ['Items']
+router.put('/:id', isAuthenticated, validateIdParam, validateItems, handleValidationErrors, itemController.updateItem);
+  //#swagger.tags = ['Items']
+router.delete('/:id', isAuthenticated, validateIdParam, handleValidationErrors, itemController.deleteItem);
 
 
-router.post('/', (req, res) => {
+//router.post('/', (req, res) => {
   //#swagger.tags = ['Items']
   //#swagger.description = 'Add new item'
   /* 
@@ -28,8 +35,8 @@ router.post('/', (req, res) => {
     }
   }
   */
-  res.send('Item added');
-});
+//  res.send('Item added');
+//});
 
 
 module.exports = router;
