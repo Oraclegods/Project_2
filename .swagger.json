@@ -1,54 +1,22 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Users Api",
-    "description": "Users Api",
+    "title": "Users and Items API",
+    "description": "API for managing users and items.",
     "version": "1.0.0"
   },
   "host": "project-2-0f7y.onrender.com",
   "basePath": "/",
   "schemes": ["https"],
   "paths": {
-    "/": {
-      "get": {
-        "tags": ["users"],
-        "description": "",
-        "responses": {
-          "200": {"description": "OK"}
-        }
-      },
-      "post": {
-        "tags": ["Items"],
-        "description": "Add new item",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Item info",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {"type": "string", "example": "Sample Item"},
-                "price": {"type": "number", "example": 10.5}
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {"description": "OK"},
-          "201": {"description": "Created"},
-          "400": {"description": "Bad Request"},
-          "500": {"description": "Internal Server Error"}
-        }
-      }
-    },
     "/users/": {
       "get": {
-        "tags": ["Users"],
+        "tags": ["users"],
         "description": "Get all users",
         "responses": {
-          "200": {"description": "OK"}
+          "200": {
+            "description": "OK"
+          }
         }
       },
       "post": {
@@ -59,82 +27,193 @@
             "name": "body",
             "in": "body",
             "required": true,
-            "description": "User object",
             "schema": {
               "type": "object",
-              "required": ["name", "email", "gender", "Birthday", "school", "course", "year"],
               "properties": {
-                "name": {"type": "string", "example": "Jane Doe"},
-                "email": {"type": "string", "example": "jane@example.com"},
-                "gender": {"type": "string", "example": "female"},
-                "Birthday": {"type": "string", "format": "date", "example": "1995-08-15"},
-                "school": {"type": "string", "example": "University of Lagos"},
-                "course": {"type": "string", "example": "Computer Science"},
-                "year": {"type": "integer", "example": 2025}
-              }
+                "name": { "type": "string", "example": "John Doe" },
+                "email": { "type": "string", "example": "john@example.com" },
+                "gender": { "type": "string", "example": "male" },
+                "Birthday": { "type": "string", "example": "2000-01-01" },
+                "school": { "type": "string", "example": "University of Lagos" },
+                "course": { "type": "string", "example": "Computer Science" },
+                "year": { "type": "string", "example": "2025" }
+              },
+              "required": ["name", "email", "gender", "Birthday", "school", "course", "year"]
             }
           }
         ],
         "responses": {
-          "201": {"description": "Created"},
-          "400": {"description": "Bad Request"},
-          "500": {"description": "Internal Server Error"}
+          "201": { "description": "User Created" },
+          "400": { "description": "Bad Request" },
+          "500": { "description": "Internal Server Error" }
         }
       }
     },
     "/users/{id}": {
       "get": {
         "tags": ["users"],
-        "description": "",
-        "produces": ["application/json"],
+        "description": "Get a user by ID",
         "parameters": [
-          {"name": "id", "in": "path", "required": true, "type": "string"}
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
         ],
         "responses": {
-          "200": {"description": "OK"},
-          "400": {"description": "Bad Request"}
+          "200": { "description": "OK" },
+          "400": { "description": "Bad Request" }
         }
       },
       "put": {
         "tags": ["users"],
-        "description": "Update a user",
+        "description": "Update a user by ID",
         "parameters": [
-          {"name": "id", "in": "path", "required": true, "type": "string"},
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
               "type": "object",
-              "required": ["name", "email", "gender", "Birthday", "school", "course", "year"],
               "properties": {
-                "name": {"type": "string", "example": "Jane Doe"},
-                "email": {"type": "string", "example": "jane@example.com"},
-                "gender": {"type": "string", "example": "female"},
-                "Birthday": {"type": "string", "format": "date", "example": "1995-08-15"},
-                "school": {"type": "string", "example": "University of Lagos"},
-                "course": {"type": "string", "example": "Computer Science"},
-                "year": {"type": "integer", "example": 2025}
+                "name": { "type": "string", "example": "John Doe" },
+                "email": { "type": "string", "example": "john@example.com" },
+                "gender": { "type": "string", "example": "male" },
+                "Birthday": { "type": "string", "example": "2000-01-01" },
+                "school": { "type": "string", "example": "University of Lagos" },
+                "course": { "type": "string", "example": "Computer Science" },
+                "year": { "type": "string", "example": "2025" }
               }
             }
           }
         ],
         "responses": {
-          "204": {"description": "No Content"},
-          "400": {"description": "Bad Request"},
-          "500": {"description": "Internal Server Error"}
+          "204": { "description": "No Content" },
+          "400": { "description": "Bad Request" },
+          "500": { "description": "Internal Server Error" }
         }
       },
       "delete": {
         "tags": ["users"],
-        "description": "",
+        "description": "Delete a user by ID",
         "parameters": [
-          {"name": "id", "in": "path", "required": true, "type": "string"}
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
         ],
         "responses": {
-          "204": {"description": "No Content"},
-          "400": {"description": "Bad Request"},
-          "404": {"description": "Not Found"}
+          "204": { "description": "No Content" },
+          "400": { "description": "Bad Request" },
+          "404": { "description": "Not Found" }
+        }
+      }
+    },
+    "/items/": {
+      "get": {
+        "tags": ["items"],
+        "description": "Get all items",
+        "responses": {
+          "200": { "description": "OK" }
+        }
+      },
+      "post": {
+        "tags": ["items"],
+        "description": "Add new item",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Item info",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string", "example": "Water Bottle" },
+                "price": { "type": "number", "example": 10.5 },
+                "inStock": { "type": "boolean", "example": true }
+              },
+              "required": ["name", "price", "inStock"]
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK" },
+          "400": { "description": "Bad Request" }
+        }
+      }
+    },
+    "/items/{id}": {
+      "get": {
+        "tags": ["items"],
+        "description": "Get item by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "OK" },
+          "400": { "description": "Bad Request" }
+        }
+      },
+      "put": {
+        "tags": ["items"],
+        "description": "Update item by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string", "example": "Water Bottle" },
+                "price": { "type": "number", "example": 10.5 },
+                "inStock": { "type": "boolean", "example": true }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": { "description": "No Content" },
+          "400": { "description": "Bad Request" },
+          "500": { "description": "Internal Server Error" }
+        }
+      },
+      "delete": {
+        "tags": ["items"],
+        "description": "Delete item by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": { "description": "No Content" },
+          "400": { "description": "Bad Request" },
+          "404": { "description": "Not Found" }
         }
       }
     }
