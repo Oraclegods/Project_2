@@ -32,8 +32,12 @@ const createUser = async (req, res) => {
    try {
       const user = {
          name: req.body.name,
-         price: req.body.price,
-         inStock: req.body.inStock
+         email: req.body.email,
+         gender: req.body.gender,
+         Birthday: req.body.Birthday,
+         school: req.body.school,
+         course: req.body.course,
+         year: req.body.year
       };
       const response = await mongodb.getDatabase().db('products').collection('users').insertOne(user);
       if (response.acknowledged) {
@@ -52,8 +56,12 @@ const updateUser = async (req, res) => {
       const userId = new ObjectId(req.params.id);
       const user = {
          name: req.body.name,
-         price: req.body.price,
-         inStock: req.body.inStock
+         email: req.body.email,
+         gender: req.body.gender,
+         Birthday: req.body.Birthday,
+         school: req.body.school,
+         course: req.body.course,
+         year: req.body.year
       };
       const response = await mongodb.getDatabase().db('products').collection('users').replaceOne({ _id: userId }, user);
       if (response.modifiedCount > 0) {
